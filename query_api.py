@@ -1,3 +1,5 @@
+import logging
+
 import requests
 
 headers = {
@@ -3363,4 +3365,5 @@ json_data = {
 
 
 def get_data():
+    logging.info("Requesting data...")
     return requests.post('https://www.svivaaqm.net/report/GetMultiStationReportData', headers=headers, json=json_data).json()
