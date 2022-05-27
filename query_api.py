@@ -2,6 +2,10 @@ import datetime
 import logging
 
 import requests
+from pytz import timezone
+
+TIMEZONE = 'Israel'
+LOCAL_TZ = timezone(TIMEZONE)
 
 headers = {
     'authority': 'www.svivaaqm.net',
@@ -21,11 +25,10 @@ headers = {
     'x-requested-with': 'XMLHttpRequest',
 }
 
-now = datetime.datetime.now()
-start_time = datetime.datetime.now() - datetime.timedelta(hours=2, minutes=0)
+start_time = datetime.datetime.now(LOCAL_TZ) - datetime.timedelta(hours=2, minutes=0)
 start_str = start_time.strftime("%d/%m/%Y %H:%M")
 
-end_str = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+end_str = datetime.datetime.now(LOCAL_TZ).strftime("%d/%m/%Y %H:%M")
 
 json_data = {
     'monitorChannelsByStationId': {
