@@ -14,7 +14,7 @@ LIMITS = {
         "units": "µg/m³",
         "name": "אוזון O3"
     },
-    "SO2":{
+    "SO2": {
         "max": 350,
         "units": "µg/m³",
         "name": "גפרית דו-חמצנית SO2"

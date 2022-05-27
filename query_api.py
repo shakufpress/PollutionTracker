@@ -1,3 +1,4 @@
+import datetime
 import logging
 
 import requests
@@ -19,6 +20,12 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36',
     'x-requested-with': 'XMLHttpRequest',
 }
+
+now = datetime.datetime.now()
+start_time = datetime.datetime.now() - datetime.timedelta(hours=2, minutes=0)
+start_str = start_time.strftime("%d/%m/%Y %H:%M")
+
+end_str = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
 
 json_data = {
     'monitorChannelsByStationId': {
@@ -1601,10 +1608,10 @@ json_data = {
         ],
     },
     'reportName': 'multi Station report',
-    'startDateAbsolute': '25/05/2022 20:01',
-    'endDateAbsolute': '25/05/2022 21:00',
-    'startDate': '25/05/2022 20:01',
-    'endDate': '25/05/2022 21:00',
+    'startDateAbsolute': start_str,
+    'endDateAbsolute': end_str,
+    'startDate': start_str,
+    'endDate': end_str,
     'reportType': 'Average',
     'fromTb': 60,
     'toTb': 60,
@@ -3365,5 +3372,5 @@ json_data = {
 
 
 def get_data():
-    logging.info("Requesting data...")
+    logging.info(f"Requesting data between {start_str} and {end_str}...")
     return requests.post('https://www.svivaaqm.net/report/GetMultiStationReportData', headers=headers, json=json_data).json()
