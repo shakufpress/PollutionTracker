@@ -6,14 +6,14 @@ import tweepy
 
 import conf
 
-consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
-consumer_secret = os.environ.get('TWITTER_CONSUMER_SECRET')
-access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
-access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.secure = True
-auth.set_access_token(access_token, access_token_secret)
-twitter_api = tweepy.API(auth)
+# consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
+# consumer_secret = os.environ.get('TWITTER_CONSUMER_SECRET')
+# access_token = os.environ.get('TWITTER_ACCESS_TOKEN')
+# access_token_secret = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+# auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+# auth.secure = True
+# auth.set_access_token(access_token, access_token_secret)
+# twitter_api = tweepy.API(auth)
 
 if 'TESTING' in os.environ:
     if os.environ['TESTING'] == 'False':
@@ -28,7 +28,7 @@ def tweet_report(station, pollutant_id, pollutant_value):
     pollutant_name = conf.LIMITS[pollutant_id]["name"]
     recommended_maximum = conf.LIMITS[pollutant_id]["max"]
     units = conf.LIMITS[pollutant_id]["units"]
-    print(f"""REPORT found high values of {pollutant_name} in station {station}.
+    logging.debug(f"""REPORT found high values of {pollutant_name} in station {station}.
 One hour average is {pollutant_value} {units} (Maximum recommended is {recommended_maximum} {units})""")
 
 
