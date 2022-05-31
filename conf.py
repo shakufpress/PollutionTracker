@@ -9,11 +9,6 @@ LIMITS = {
         "units": "µg/m³",
         "name": "חנקן דו חמצני NO2"
     },
-    "O3": {
-        "max": 140,
-        "units": "µg/m³",
-        "name": "אוזון O3"
-    },
     "SO2": {
         "max": 350,
         "units": "µg/m³",
