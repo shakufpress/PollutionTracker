@@ -1,9 +1,4 @@
 LIMITS = {
-    "PM2.5": {
-        "max": 37.5,
-        "units": "µg/m³",
-        "name": "חומר חלקיקי עדין מרחף שקוטר חלקיקיו קטן מ-2.5 מיקרומטר PM2.5"
-    },
     "NO2": {
         "max": 200,
         "units": "µg/m³",
@@ -15,11 +10,22 @@ LIMITS = {
         "name": "גפרית דו-חמצנית SO2"
     },
     "Benzene": {
-        "max": 3.9,
+        "max": 0,#3.9,
         "units": "µg/m³",
-        "name": "בנזן Benzene-C6H6"
+        "name": "בנזן\nBenzene-C6H6"
     }
 }
+
+from pytz import timezone
+
+TIMEZONE = 'Israel'
+LOCAL_TZ = timezone(TIMEZONE)
+
+PLACID_URL = "https://api.placid.app/api/rest/2ctlvbqbl"
+PLACID_ATTEMPTS = 10
+PLACID_SLEEP = 1
+
+TWEET_TEXT = "זוהתה מדידה גבוהה של המזהם {}, בתחנת ניטור {}. הערך הממוצע בשעה האחרונה:  {} (ערך חוקי מקסימלי: {})."
 
 STATION_MAPPING = {426: 'מצפה נטופה (אבן וסיד)', 334: 'ניידת - 2 רכבת ישראל (רכבת ישראל)',
                    538: 'בית העמק (מחצבת אושרת)', 427: 'טורעאן החדשה (אבן וסיד)', 537: 'געתון (מחצבת אושרת)',

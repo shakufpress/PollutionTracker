@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 import collections
 import logging
+from datetime import datetime
+
 import sys
 
 import conf
+import image_template
 import query_api
 import twitter_helper
 
@@ -40,6 +43,19 @@ def parse_raw_data(raw_data):
     return abnormalities
 
 
+def report(station, pollutant_id, pollutant_value):
+    pollutant_name = conf.LIMITS[pollutant_id]["name"]
+    recommended_maximum = conf.LIMITS[pollutant_id]["max"]
+    units = conf.LIMITS[pollutant_id]["units"]
+    logging.info(f"Reporting found high values of {pollutant_name} in station {station}. average is {pollutant_value} {units} (Maximum recommended is {recommended_maximum} {units})")
+
+    when = datetime.now(conf.LOCAL_TZ).strftime("%d/%m/%y")
+    image_path = image_template.get_image_path(when, pollutant_value, recommended_maximum, pollutant_name, station)
+
+    media_id = twitter_helper.upload_media(image_path)
+    tweet_text = conf.TWEET_TEXT.format(pollutant_name, station, pollutant_value + " " + units, recommended_maximum + " " + units)
+    twitter_helper.tweet_with_media(tweet_text, media_id)
+
 def main():
     set_logger()
 
@@ -49,7 +65,9 @@ def main():
         stations = parse_raw_data(data)
         for station, abnormalities in stations.items():
             for pollutant_id, pollutant_value in abnormalities:
-                twitter_helper.tweet_report(station, pollutant_id, pollutant_value)
+                report(station, pollutant_id, pollutant_value)
+
+
     except Exception:
         logging.exception('Code exited')
 
