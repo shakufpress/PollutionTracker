@@ -10,9 +10,9 @@ LIMITS = {
         "name": "גפרית דו-חמצנית SO2"
     },
     "Benzene": {
-        "max": 0,#3.9,
+        "max": 3.9,
         "units": "µg/m³",
-        "name": "בנזן\nBenzene-C6H6"
+        "name": "בנזן\n(Benzene-C6H6)"
     }
 }
 

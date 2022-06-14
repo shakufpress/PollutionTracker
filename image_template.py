@@ -28,7 +28,7 @@ def get_image_url(when, pollutant_value, recommended_maximum, pollutant_name, st
                         "text": pollutant_value
                     },
                     "Permitted Value": {
-                        "text": recommended_maximum
+                        "text": str(recommended_maximum)
                     },
                     "Polluter": {
                         "text": pollutant_name

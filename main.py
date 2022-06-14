@@ -47,14 +47,18 @@ def report(station, pollutant_id, pollutant_value):
     pollutant_name = conf.LIMITS[pollutant_id]["name"]
     recommended_maximum = conf.LIMITS[pollutant_id]["max"]
     units = conf.LIMITS[pollutant_id]["units"]
-    logging.info(f"Reporting found high values of {pollutant_name} in station {station}. average is {pollutant_value} {units} (Maximum recommended is {recommended_maximum} {units})")
+    logging.info(
+        f"Reporting found high values of {pollutant_name} in station {station}. average is {pollutant_value} {units} (Maximum recommended is {recommended_maximum} {units})")
 
     when = datetime.now(conf.LOCAL_TZ).strftime("%d/%m/%y")
     image_path = image_template.get_image_path(when, pollutant_value, recommended_maximum, pollutant_name, station)
 
     media_id = twitter_helper.upload_media(image_path)
-    tweet_text = conf.TWEET_TEXT.format(pollutant_name, station, pollutant_value + " " + units, recommended_maximum + " " + units)
+    tweet_pollutant_name = pollutant_name.replace("\n", " ")
+    tweet_text = conf.TWEET_TEXT.format(tweet_pollutant_name, station, str(pollutant_value) + " " + units,
+                                        str(recommended_maximum) + " " + units)
     twitter_helper.tweet_with_media(tweet_text, media_id)
+
 
 def main():
     set_logger()
