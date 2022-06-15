@@ -50,7 +50,7 @@ def report(station, pollutant_id, pollutant_value):
     logging.info(
         f"Reporting found high values of {pollutant_name} in station {station}. average is {pollutant_value} {units} (Maximum recommended is {recommended_maximum} {units})")
 
-    when = datetime.now(conf.LOCAL_TZ).strftime("%d/%m/%y")
+    when = datetime.now(conf.LOCAL_TZ).strftime("%d/%m/%y %H:%M")
     image_path = image_template.get_image_path(when, pollutant_value, recommended_maximum, pollutant_name, station)
 
     media_id = twitter_helper.upload_media(image_path)
