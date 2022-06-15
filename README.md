@@ -15,3 +15,7 @@ recommended [by law](https://www.nevo.co.il/law_html/law00/77858.htm).
 
 If an abnormality is found, an image is rendered using ```placid.app``` service
 and posted to the Twitter account via Twitter's API.
+
+## Todo
+
+1. Post sequential reports as reply tweets.
