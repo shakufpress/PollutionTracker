@@ -30,10 +30,9 @@ def parse_raw_data(raw_data):
     logging.info("Parsing results...")
     abnormalities = collections.defaultdict(list)
     for station in raw_data:
-        station_id = station["StationId"]
-        station_name = conf.STATION_MAPPING[station_id]
+        station_name = station["name"]
         for pollutant in station["data"][0]["channels"]:
-            pollutant_name = pollutant["DisplayName"]
+            pollutant_name = pollutant["name"]
             if pollutant_name in conf.LIMITS:
                 pollutant_value = pollutant["value"]
                 if pollutant_value > conf.LIMITS[pollutant_name]["max"]:
