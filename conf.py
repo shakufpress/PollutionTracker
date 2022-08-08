@@ -27,3 +27,8 @@ PLACID_SLEEP = 1
 
 TWEET_TEXT = 'זוהתה מדידה גבוהה של המזהם {}, בתחנת ניטור {}. הערך הממוצע בשעה האחרונה: {} (ערך חוקי מקסימלי: {' \
              '}).\n\n#הקנרית - בוט זיהום האוויר של "הגחלילית" '
+
+
+GET_ALL_STATIONS_URL = "https://api.svivaaqm.net/v1/envista/stations"
+GET_STATION_AVERAGE = "https://api.svivaaqm.net/v1/envista/stations/{}/data/latest?timebase=60"
+NAME_KEY = "name"
