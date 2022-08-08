@@ -32,11 +32,12 @@ def parse_raw_data(raw_data):
     for station in raw_data:
         station_name = station["name"]
         for pollutant in station["data"][0]["channels"]:
-            pollutant_name = pollutant["name"]
-            if pollutant_name in conf.LIMITS:
-                pollutant_value = pollutant["value"]
-                if pollutant_value > conf.LIMITS[pollutant_name]["max"]:
-                    abnormalities[station_name].append((pollutant_name, pollutant_value))
+            if pollutant["valid"]:
+                pollutant_name = pollutant["name"]
+                if pollutant_name in conf.LIMITS:
+                    pollutant_value = pollutant["value"]
+                    if pollutant_value > conf.LIMITS[pollutant_name]["max"]:
+                        abnormalities[station_name].append((pollutant_name, pollutant_value))
 
     logging.info(f"Finished parsing results. Found {len(abnormalities)} abnormalities")
     return abnormalities
